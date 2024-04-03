@@ -33,11 +33,13 @@ function Snowman({
   const [nWrong, setNWrong] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState(() => new Set());
   const [answer, setAnswer] = useState((words)[0]);
-
+      //TODO: why is this state?
+      
   /** guessedWord: show current-state of word:
    if guessed letters are {a,p,e}, show "app_e" for "apple"
    */
   function guessedWord() {
+    // setAnswer(answer => answer)
     return answer
         .split("")
         .map(ltr => (guessedLetters.has(ltr) ? ltr : "_"));
@@ -63,6 +65,7 @@ function Snowman({
   function generateButtons() {
     return "abcdefghijklmnopqrstuvwxyz".split("").map(ltr => (
         <button
+            id={ltr}
             key={ltr}
             value={ltr}
             onClick={handleGuess}
@@ -75,9 +78,13 @@ function Snowman({
 
   return (
       <div className="Snowman">
-        <img src={(images)[nWrong]} alt={nWrong} />
+        <img src={nWrong (images)[nWrong]} alt={nWrong} />
+        <p>Number wrong: {nWrong}</p>
+        {nWrong <= maxWrong && <div>
         <p className="Snowman-word">{guessedWord()}</p>
-        <p>{generateButtons()}</p>
+        <p className="Snowman-letterBtns">{generateButtons()}</p></div> }
+        {nWrong >= maxWrong &&
+        <p className="Snowman-gameOver"> You lose : {answer} </p>}
       </div>
   );
 }
