@@ -21,4 +21,24 @@ test("when guessed max guesses shows you lose", function() {
     expect(
         container.querySelector('.Snowman-gameOver')
         ).toBeInTheDocument()
-} )
+})
+
+// snapshot test
+test("matches snapshot", function () {
+  const { container } = render(<Snowman
+    images={[img0, img1, img2, img3, img4, img5, img6]}
+    words={["apple"]}
+    maxWrong={1}
+    />)
+  expect(container).toMatchSnapshot();
+})
+
+// smoke test
+test("renders without crashing", function () {
+  render(<Snowman
+    images={[img0, img1, img2, img3, img4, img5, img6]}
+    words={["apple"]}
+    maxWrong={1}
+    />)
+})
+
